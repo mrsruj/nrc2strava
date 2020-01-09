@@ -1,6 +1,7 @@
 from xml.etree.ElementTree import Element, SubElement, tostring
 from xml.dom import minidom
 from slugify import slugify
+from os.path import join
 
 def gpx_gen(time,name,timestamps,lat,lon):
 	"""
