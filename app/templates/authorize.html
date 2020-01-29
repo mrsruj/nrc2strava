@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<h3>Login to Strava</h3>
+	</div>
+	<div class="lead">
+		<br>
+		<p>Here you authenticate write permissions to your Strava account.</p>
+	</div>
+	<div class="alert alert-warning" role="alert">
+		<b>Click on the strava-connect button and hang on :)</b><br>
+		This might take some time, as I am pulling your nike activities in the background...
+	</div>
+	<div class="alert alert-danger" role="alert">
+		Do not reload the page!
+	</div>
+	<div class="row">
+		<p><a class="btn btn-lg" href="{{ authorize_url }}" role="button">
+			<img src="/static/strava.png" width="150" height="32"></a>
+		</p>
+	</div>
+</div>	
+
+{% endblock %}

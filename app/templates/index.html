@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+			<h2 class="text-danger">NOT FOR PRODUCTION!!!</h2>
+	</div>
+	<div class="row">
+			<p>This page is for development purposes only.</p>
+			<br><br>
+			<p>To continue enter your Client ID and Client Secret below. Note that ideally you would want to use these as environment variables to keep them secret. You can obtain these by sign up for a developer account at strava <a href='https://developers.strava.com/docs/getting-started/#account' target="_blank">here</a>.</p>
+			<br>
+			<p>You need to also provide an authorized Bearer Token for your NRC account. You can follow <a href="https://medium.com/@sruj/migrating-from-nrc-to-strava-994ef34c963d" target="_blank">this</a> guide to obtain the same.</p>
+	</div>
+	<br>
+	<form action="{{ url_for('authorize') }}" method="post">
+		<div class="container">
+			<form>
+				<div class="row">
+					<div class="col">
+						<input type="text" name="client_id" class="form-control" placeholder="Client ID" required>
+					</div>
+					<div class="col">
+						<input type="text" name="client_secret" class="form-control" placeholder="Client Secret" required>
+					</div>
+					<div class="col">
+						<input type="text" name="bearer_token" class="form-control" placeholder="Bearer Token" required>
+					</div>
+				</div>
+				<br>
+				<button type="submit" class="btn btn-outline-dark btn">Submit</button>
+			</form>
+		</div>
+	</form>
+</div>
+
+{% endblock %}
+
+

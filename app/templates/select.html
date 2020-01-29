@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+	<h2><p class="text-primary">Welcome {{athlete}}!</p></h2>
+	<h3>Select the activities you want to upload to strava.</h3>
+	<div class="alert alert-warning" role="alert">
+		<b>Click on the submit button and hang on :)</b><br>
+		This might take some time, as I am pushing your activities to strava in the background...
+	</div>
+	<div class="alert alert-danger" role="alert">
+		Do not reload the page!
+	</div>
+	<form action="{{ url_for('upload') }}" method="post">
+		<div class="custom-control custom-switch">
+			<input type="checkbox" name="select-all" class="custom-control-input" id="switch1">
+			<label class="custom-control-label" for="switch1">Select All</label>
+		</div>
+		<br>
+		<div class="card" style="height:250px; overflow:auto; width:100%; overflow:scroll;">
+			<div class="card-header"><h5><b>Select activities (Total: {{n_activities}})</h5></b></h5></div>
+			<div class="card-body">
+			{% for file in files %}
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" name = "{{file}}" class="custom-control-input" id="{{file}}">
+					<label class="custom-control-label" for="{{file}}">{{file}}</label>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+		<br>
+		<button type="submit" class="btn btn-outline-success btn">Continue</button>
+	</form>
+</div>
+
+{% endblock %}

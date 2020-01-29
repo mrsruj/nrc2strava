@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+	<h3><b><font color="red">Error!</font></b></h3>
+  </div>
+  <div class="lead">
+	  <br>
+	  <p>Opps looks like you have encountered an error :(</p>
+	  <p>If you think it's an internal error, report it at <a href="https://github.com/srujanpatil/nrc2strava" target="_blank">nrc2strava</a> and help me get better.</p>
+	</div>
+	<div class="row">
+		<div class="alert alert-danger" role="alert"><b>Message:</b> {{error}}</div>
+	</div>
+</div>
+
+{% endblock %}
