@@ -7,4 +7,4 @@ https://colab.research.google.com/drive/1J61iLuzZGBfXNjmYsiFborwEheIX01rQ
 
 ---
 
-If you are a strava-developer you could use the ./app to run the above process in a interactive web-app.
+**Update:** You could now head over to ./app and run a simple web-app to run the above process with most of it automated.
