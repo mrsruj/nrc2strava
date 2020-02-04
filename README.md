@@ -8,3 +8,6 @@ https://colab.research.google.com/drive/1J61iLuzZGBfXNjmYsiFborwEheIX01rQ
 ---
 
 **Update:** You could now head over to ./app and run a simple web-app to run the above process with most of it automated.
+
+
+NikeApi source: https://gist.github.com/niw/858c1ecaef89858893681e46db63db66
