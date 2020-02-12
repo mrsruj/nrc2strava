@@ -31,12 +31,11 @@ def extract(filename):
 					lat_values = metric['values']
 				elif(metric['type']=='longitude'):
 					lon_values = metric['values']
-				
 			for lat1, lon1 in zip(lat_values, lon_values):
 				timestamps.append(datetime.utcfromtimestamp(lat1['start_epoch_ms']/1000).replace(microsecond=0).isoformat()+'Z')
 				lat.append(lat1['value'])
 				lon.append(lon1['value'])
 # 			return time, name, temp, heartrate, distance, timestamps, lat, lon;
 			return time, name, timestamps, lat, lon;
-		except ExtractError as e:
+		except:
 			return None
