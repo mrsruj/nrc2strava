@@ -1,5 +1,4 @@
 import json 
-import logging
 from datetime import datetime
 
 def extract(filename):
@@ -40,5 +39,4 @@ def extract(filename):
 # 			return time, name, temp, heartrate, distance, timestamps, lat, lon;
 			return time, name, timestamps, lat, lon;
 		except ExtractError as e:
-			logging.exception("message")
 			return None
