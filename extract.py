@@ -9,7 +9,7 @@ def extract(filename):
 	:param time: filepath to json 
 	:type time: str
 
-	:return: (time, name, temp, heartrate, distance, [timestamps], [latitude], [longitude])
+	:return: (time, name, [timestamps], [latitude], [longitude])
 	:rtype: tuple
 	"""
 	with open(filename, 'r') as f:
@@ -20,12 +20,12 @@ def extract(filename):
 		try:
 			time = datetime.utcfromtimestamp(data['start_epoch_ms']/1000).replace(microsecond=0).isoformat()+'Z'
 			name = data['tags']['com.nike.name'] or time.strftime("%A %d/%m/%Y")
-			temp = data['tags']['com.nike.temperature'] or data['tags']['emetemperature']
-			for summary in data['summaries']:
-				if(summary['type']=='heart_rate'):
-					heartrate = metric['value']
-				elif(metric['type']=='distance'):
-					distance = metric['value']
+# 			temp = data['tags']['com.nike.temperature'] or data['tags']['emetemperature']
+# 			for summary in data['summaries']:
+# 				if(summary['type']=='heart_rate'):
+# 					heartrate = metric['value']
+# 				elif(metric['type']=='distance'):
+# 					distance = metric['value']
 			for metric in data['metrics']:
 				if(metric['type']=='latitude'):
 					lat_values = metric['values']
@@ -36,7 +36,8 @@ def extract(filename):
 				timestamps.append(datetime.utcfromtimestamp(lat1['start_epoch_ms']/1000).replace(microsecond=0).isoformat()+'Z')
 				lat.append(lat1['value'])
 				lon.append(lon1['value'])
-			return time, name, temp, heartrate, distance, timestamps, lat, lon;
+# 			return time, name, temp, heartrate, distance, timestamps, lat, lon;
+			return time, name, timestamps, lat, lon;
 		except ExtractError as e:
 			logging.exception("message")
 			return None
