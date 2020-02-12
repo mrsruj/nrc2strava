@@ -18,7 +18,7 @@ def extract(filename):
 		timestamps, lat, lon = [], [], []
 		try:
 			time = datetime.utcfromtimestamp(data['start_epoch_ms']/1000).replace(microsecond=0).isoformat()+'Z'
-			name = data['tags']['com.nike.name'] or "test"
+			name = data['tags']['com.nike.name']
 # 			name = data['tags']['com.nike.name'] or datetime.utcfromtimestamp(data['start_epoch_ms']/1000).strftime("%A %d/%m/%Y")
 # 			temp = data['tags']['com.nike.temperature'] or data['tags']['emetemperature']
 # 			for summary in data['summaries']:
