@@ -18,7 +18,7 @@ def extract(filename):
 		timestamps, lat, lon = [], [], []
 		try:
 			time = datetime.utcfromtimestamp(data['start_epoch_ms']/1000).replace(microsecond=0).isoformat()+'Z'
-			name = data['tags']['com.nike.name']
+			name = data['tags']['com.nike.name'] or time.strftime("%A %d/%m/%Y")
 			for metric in data['metrics']:
 				if(metric['type']=='latitude'):
 					lat_values = metric['values']
