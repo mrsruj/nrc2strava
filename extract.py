@@ -1,11 +1,11 @@
-import json 
+import json
 from datetime import datetime
 
 def extract(filename):
 	"""
 	Extract data from json.
 
-	:param time: filepath to json 
+	:param time: filepath to json
 	:type time: str
 
 	:return: (time, name, [timestamps], [latitude], [longitude])
@@ -17,15 +17,12 @@ def extract(filename):
 	if(data['type']=='run'):
 		timestamps, lat, lon = [], [], []
 		try:
-			time = datetime.utcfromtimestamp(data['start_epoch_ms']/1000).replace(microsecond=0).isoformat()+'Z'
-			name = data['tags']['com.nike.name']
-# 			name = data['tags']['com.nike.name'] or datetime.utcfromtimestamp(data['start_epoch_ms']/1000).strftime("%A %d/%m/%Y")
-# 			temp = data['tags']['com.nike.temperature'] or data['tags']['emetemperature']
-# 			for summary in data['summaries']:
-# 				if(summary['type']=='heart_rate'):
-# 					heartrate = metric['value']
-# 				elif(metric['type']=='distance'):
-# 					distance = metric['value']
+			starttime = datetime.utcfromtimestamp(data['start_epoch_ms']/1000)
+			time = starttime.replace(microsecond=0).isoformat()+'Z'
+			try:
+				name = data['tags']['com.nike.name']
+			except:
+				name = starttime.strftime('%A')
 			for metric in data['metrics']:
 				if(metric['type']=='latitude'):
 					lat_values = metric['values']
@@ -35,7 +32,6 @@ def extract(filename):
 				timestamps.append(datetime.utcfromtimestamp(lat1['start_epoch_ms']/1000).replace(microsecond=0).isoformat()+'Z')
 				lat.append(lat1['value'])
 				lon.append(lon1['value'])
-# 			return time, name, temp, heartrate, distance, timestamps, lat, lon;
 			return time, name, timestamps, lat, lon;
 		except:
 			return None
