@@ -1,13 +1,11 @@
-import json 
+import json
 from datetime import datetime
 
 def extract(filename):
 	"""
 	Extract data from json.
-
-	:param time: filepath to json 
+	:param time: filepath to json
 	:type time: str
-
 	:return: (time, name, [timestamps], [latitude], [longitude])
 	:rtype: tuple
 	"""
@@ -17,8 +15,12 @@ def extract(filename):
 	if(data['type']=='run'):
 		timestamps, lat, lon = [], [], []
 		try:
-			time = datetime.utcfromtimestamp(data['start_epoch_ms']/1000).replace(microsecond=0).isoformat()+'Z'
-			name = data['tags']['com.nike.name']
+			starttime = datetime.utcfromtimestamp(data['start_epoch_ms']/1000)
+			time = starttime.replace(microsecond=0).isoformat()+'Z'
+			try:
+				name = data['tags']['com.nike.name']
+			except:
+				name = starttime.strftime('%A')
 			for metric in data['metrics']:
 				if(metric['type']=='latitude'):
 					lat_values = metric['values']
