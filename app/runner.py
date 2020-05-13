@@ -1,8 +1,19 @@
 import os
+import glob
 from os.path import join
 from gpx_builder import gpx_gen
 from extract import extract
 import requests
+
+
+def listdir_nohidden(path):
+	"""
+	https://stackoverflow.com/a/7099342
+	ignore hidden files like the .gitkeep file
+	"""
+	for f in os.listdir(path):
+		return glob.glob(os.path.join(path, '*'))
+
 
 class nike(object):
 	
@@ -21,22 +32,22 @@ class nike(object):
 		except:
 			return {'code':'Error', 'message':'Error in executing pull_activities.bash'}
 
-		if(len(os.listdir('./activities_json')) == 0):
+		if(len(listdir_nohidden('./activities_json')) == 0):
 			return {'code':'Error', 'message': 'Unauthorized bearer_token'}
 		else:
-			return {'code':'Success', 'message': f"{len(os.listdir('./activities_json'))} Nike workouts successfully retrieved."} 
+			return {'code':'Success', 'message': f"{len(listdir_nohidden('./activities_json'))} Nike workouts successfully retrieved."} 
 
 	def json2gpx(self):
 		"""
 		convert json to gpx
 		"""
-		files = [join('./activities_json',f) for f in os.listdir('./activities_json')]
+		files = [join('./activities_json',f) for f in listdir_nohidden('./activities_json')]
 		for file in files:
 			data = extract(file)
 			if(data!=None):
 				gpx_gen(data[0],data[1],data[2],data[3],data[4])
 
-		n_files = len(os.listdir('./activities_gpx'))
+		n_files = len(listdir_nohidden('./activities_gpx'))
 		if(n_files == 0):    	
 			return {'code':'Error', 'message': 'No run activities were found'}    
 		return {'code':'Success', 'message': f"{n_files}Nike runs converted to gpx."}

@@ -57,8 +57,8 @@ def select():
 	err = nike_client.json2gpx()
 	if(err['code'] != 'Success'):
 		return render_template('error.html', error=err['message'])
-	files = os.listdir('./activities_gpx')
-	return render_template('select.html',files = files, athlete = athlete_name, n_activities=len(os.listdir('./activities_gpx')))
+	files = [f for f in os.listdir('./activities_gpx') if not f.startswith('.')]
+	return render_template('select.html',files = files, athlete = athlete_name, n_activities=len(files))
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
@@ -66,7 +66,7 @@ def upload():
 	# get selected activities and upload
 	select_all = request.form.get('select-all') 
 	if(select_all == 'on'):
-		files = os.listdir('./activities_gpx')
+		files = [f for f in os.listdir('./activities_gpx') if not f.startswith('.')]
 	else:
 		files = list(request.form.keys())
 
