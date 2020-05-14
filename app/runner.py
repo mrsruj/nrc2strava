@@ -7,12 +7,7 @@ import requests
 
 
 def listdir_nohidden(path):
-	"""
-	https://stackoverflow.com/a/7099342
-	ignore hidden files like the .gitkeep file
-	"""
-	for f in os.listdir(path):
-		return glob.glob(os.path.join(path, '*'))
+	return [f for f in os.listdir('./') if not f.startswith('.')]
 
 
 class nike(object):
