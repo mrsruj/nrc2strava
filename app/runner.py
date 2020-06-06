@@ -7,7 +7,7 @@ import requests
 
 
 def listdir_nohidden(path):
-	return [f for f in os.listdir('./') if not f.startswith('.')]
+	return [f for f in os.listdir(path) if not f.startswith('.')]
 
 
 class nike(object):
